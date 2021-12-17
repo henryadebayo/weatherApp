@@ -3,6 +3,8 @@
     package="co.appbrewery.clima">
 
     <uses-permission android:name="andriod.permission.ACESS_COARSE_LOCATION"/>
+    <uses-permission android:name="andriod.permission.ACCESS_FINE_LOCATION"/>
+
 
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that

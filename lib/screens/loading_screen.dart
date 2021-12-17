@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
 import '../services/location.dart';
@@ -16,18 +16,24 @@ class _LoadingScreenState extends State<LoadingScreen> {
   double longitude;
   double latitude;
 
+
   @override
-  initState(){
+  initState() {
     super.initState();
     getLocation();
+   getPermission();
   }
+
+  void getPermission() async{
+    LocationPermission permission = await Geolocator.requestPermission();
+  }
+
 
   void getLocation() async {
     Location location = Location();
     await location.getCurrentLocation();
     longitude = location.longitude;
     latitude = location.latitude;
-
     getData();
   }
 
@@ -50,12 +56,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Text('position'),
-          // Text('$getLocation().response.statusCode'),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Center(
+              child:
+              // Text('position'),
+              Text('$longitude'),
+            ),
+            // Text('$getLocation().response.statusCode'),
+          ],
+        ),
       ),
     );
   }
